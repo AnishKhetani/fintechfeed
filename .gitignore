@@ -1,0 +1,34 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+.venv/
+venv/
+env/
+
+# Tooling
+.pytest_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+.mypy_cache/
+
+# Local config / secrets
+.env
+*.local.yaml
+config.local.yaml
+
+# Generated digests
+digests/
+*.digest.json
+*.digest.md
+
+# OS / editors / local agent config
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+.claude/

@@ -1,0 +1,44 @@
+# FinTechFeed configuration
+# Copy to `config.yaml` (git-ignored) and edit, or pass --config <path>.
+
+# Tickers to research. Each maps to the company/aliases used for name-based
+# matching in headlines and posts (in addition to $CASHTAG detection).
+watchlist:
+  NVDA: ["Nvidia"]
+  AAPL: ["Apple"]
+  TSLA: ["Tesla"]
+  MSFT: ["Microsoft"]
+  BTC: ["Bitcoin", "BTC-USD"]
+  ETH: ["Ethereum", "ETH-USD"]
+
+# Which sources to pull from. Every source below is free and needs no API key.
+sources:
+  yahoo_rss:
+    enabled: true
+  reddit:
+    enabled: true
+    subreddits: ["stocks", "wallstreetbets", "investing", "cryptocurrency"]
+    listing: "hot"      # hot | new | top
+    limit: 40           # posts fetched per subreddit
+  hackernews:
+    enabled: true
+    limit: 20           # stories per query
+
+# Sentiment aggregation.
+sentiment:
+  # Relative trust weight applied to each source's items when aggregating.
+  source_weights:
+    yahoo_rss: 1.0      # curated financial press
+    reddit: 0.6         # retail chatter, noisier
+    hackernews: 0.8
+  # A ticker needs at least this many mentions to appear in the digest.
+  min_mentions: 2
+  # Compound-score thresholds for the Bullish / Neutral / Bearish label.
+  bullish_at: 0.15
+  bearish_at: -0.15
+
+# Optional LLM synthesis of the digest narrative.
+# Requires `pip install fintechfeed[llm]` and ANTHROPIC_API_KEY in the environment.
+llm:
+  enabled: false
+  model: "claude-haiku-4-5-20251001"
