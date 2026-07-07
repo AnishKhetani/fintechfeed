@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="docs/social-preview.png" alt="FinTechFeed — market sentiment digest" width="840">
+</p>
+
 # FinTechFeed
 
 **A finance research agent that reads the market's chatter for you.**
