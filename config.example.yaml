@@ -15,6 +15,11 @@ watchlist:
 sources:
   yahoo_rss:
     enabled: true
+  edgar:
+    enabled: true
+    forms: ["8-K"]        # SEC filing forms to pull (8-K = material events)
+    limit: 10             # most-recent filings per ticker
+    lookback_days: 30     # ignore filings older than this
   reddit:
     enabled: true
     subreddits: ["stocks", "wallstreetbets", "investing", "cryptocurrency"]
@@ -29,6 +34,7 @@ sentiment:
   # Relative trust weight applied to each source's items when aggregating.
   source_weights:
     yahoo_rss: 1.0      # curated financial press
+    edgar: 1.2          # primary-source SEC filings, highest trust
     reddit: 0.6         # retail chatter, noisier
     hackernews: 0.8
   # A ticker needs at least this many mentions to appear in the digest.

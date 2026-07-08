@@ -84,6 +84,7 @@ Requires Python 3.10+.
 
 ```
                  ┌── yahoo_rss ──┐
+                 ├── edgar ──────┤
    watchlist  →  ├── reddit ─────┤ →  ticker resolver  →  sentiment  →  aggregate  →  digest
                  └── hackernews ─┘     ($TAG + aliases)    (finance      (weighted     (terminal /
                                                             VADER)        mean+label)   md / json)
@@ -109,8 +110,13 @@ Requires Python 3.10+.
 | Source | What it gives you | Notes |
 | ------ | ----------------- | ----- |
 | `yahoo_rss` | Per-ticker financial-press headlines | Highest signal; items arrive pre-tagged |
+| `edgar` | SEC 8-K material-event filings, per ticker | Primary source (highest trust); resolves ticker→CIK, reads the 8-K item codes. Neutral by default, decisive on impairment/delisting/bankruptcy |
 | `reddit` | Retail sentiment from configurable subreddits | Public RSS feeds; Reddit rate-limits aggressively by IP |
 | `hackernews` | Tech/crypto stories via the free Algolia API | Complements the finance press |
+
+> **SEC etiquette:** EDGAR asks API clients to send a contact in the User-Agent.
+> FinTechFeed ships a working default so it runs on a fresh clone; set your own
+> via `edgar.user_agent` in config or the `SEC_EDGAR_USER_AGENT` env var.
 
 Adding a source is ~30 lines: subclass `Source`, implement `fetch()`, and add
 one line to the registry.
@@ -126,7 +132,7 @@ watchlist:
   NVDA: ["Nvidia"]
   BTC: ["Bitcoin", "BTC-USD"]
 sentiment:
-  source_weights: { yahoo_rss: 1.0, reddit: 0.6, hackernews: 0.8 }
+  source_weights: { yahoo_rss: 1.0, edgar: 1.2, reddit: 0.6, hackernews: 0.8 }
   min_mentions: 2
 ```
 
@@ -152,7 +158,7 @@ opt-in and degrades to no-narrative if anything is missing.
 
 ## Roadmap
 
-- [ ] SEC EDGAR 8-K / filing sentiment channel
+- [x] SEC EDGAR 8-K / filing sentiment channel
 - [ ] Sentiment history + day-over-day deltas (a "mood is turning" signal)
 - [ ] StockTwits and a FinTwit list channel
 - [ ] Optional local FinBERT scorer as an alternative to the lexicon

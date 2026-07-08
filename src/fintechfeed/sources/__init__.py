@@ -8,6 +8,7 @@ themselves here so the CLI can enable/disable them purely from config.
 from __future__ import annotations
 
 from .base import Source
+from .edgar import EdgarSource
 from .hackernews import HackerNewsSource
 from .reddit import RedditSource
 from .rss import YahooRssSource
@@ -15,6 +16,7 @@ from .rss import YahooRssSource
 # Maps the config key -> Source class.
 REGISTRY: dict[str, type[Source]] = {
     "yahoo_rss": YahooRssSource,
+    "edgar": EdgarSource,
     "reddit": RedditSource,
     "hackernews": HackerNewsSource,
 }

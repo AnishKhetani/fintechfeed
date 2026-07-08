@@ -61,6 +61,11 @@ FINANCE_LEXICON: dict[str, float] = {
     "recall": -1.6,
     "layoffs": -1.4,
     "dilution": -1.8,
+    # Filing-language events (SEC 8-K item descriptions)
+    "impairment": -2.4,
+    "impairments": -2.4,
+    "delisting": -2.8,
+    "restructuring": -1.4,
     "short": -0.8,
     "bagholder": -2.0,
     "rug": -3.0,

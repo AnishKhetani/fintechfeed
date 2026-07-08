@@ -24,6 +24,12 @@ DEFAULT_CONFIG: dict[str, Any] = {
     },
     "sources": {
         "yahoo_rss": {"enabled": True},
+        "edgar": {
+            "enabled": True,
+            "forms": ["8-K"],
+            "limit": 10,
+            "lookback_days": 30,
+        },
         "reddit": {
             "enabled": True,
             "subreddits": ["stocks", "wallstreetbets", "investing", "cryptocurrency"],
@@ -33,7 +39,12 @@ DEFAULT_CONFIG: dict[str, Any] = {
         "hackernews": {"enabled": True, "limit": 20},
     },
     "sentiment": {
-        "source_weights": {"yahoo_rss": 1.0, "reddit": 0.6, "hackernews": 0.8},
+        "source_weights": {
+            "yahoo_rss": 1.0,
+            "edgar": 1.2,
+            "reddit": 0.6,
+            "hackernews": 0.8,
+        },
         "min_mentions": 2,
         "bullish_at": 0.15,
         "bearish_at": -0.15,
