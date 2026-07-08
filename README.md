@@ -46,14 +46,18 @@ Real output from `fintechfeed digest` (Markdown format, abridged):
 
 | Ticker | Signal | Score | Mentions | Sources |
 | ------ | ------ | ----: | -------: | ------- |
-| **TSLA** | 🟢 Bullish | +0.27 | 40 | hackernews: 21, yahoo_rss: 19 |
-| **AAPL** | 🟢 Bullish | +0.18 | 42 | hackernews: 23, yahoo_rss: 19 |
-| **NVDA** | 🟡 Neutral | +0.12 | 41 | hackernews: 20, yahoo_rss: 21 |
-| **BTC**  | 🟡 Neutral | +0.02 | 47 | hackernews: 21, yahoo_rss: 26 |
+| **AAPL** | 🟢 Bullish | +0.29 | 44 | hackernews: 23, reddit: 2, yahoo_rss: 19 |
+| **NVDA** | 🟢 Bullish | +0.19 | 48 | edgar: 3, hackernews: 20, reddit: 3, yahoo_rss: 22 |
+| **TSLA** | 🟢 Bullish | +0.18 | 44 | edgar: 1, hackernews: 21, reddit: 1, yahoo_rss: 21 |
+| **BTC**  | 🟡 Neutral | +0.03 | 51 | edgar: 1, hackernews: 21, reddit: 3, yahoo_rss: 26 |
 
-**Evidence — TSLA (Bullish, +0.27)**
-- `+0.84` [SpaceX Draws Bullish Analyst Views as Musk's Rocket Company Joins Nasdaq 100](https://finance.yahoo.com) — *yahoo_rss*
-- `+0.79` [Tesla Model S achieves best safety rating of any car ever tested](https://news.ycombinator.com) — *hackernews*
+**Evidence — TSLA (Bullish, +0.18)**
+- `+0.97` [Tesla's new SUV could be its smartest profit play yet](https://www.thestreet.com/automotive/tesla-new-suv-model-y-l-could-be-smart-profit-play) — *yahoo_rss*
+- `+0.91` [Tesla (TSLA) Lands $9 Billion In Megapack Orders And Expands Home Energy Push](https://finance.yahoo.com) — *yahoo_rss*
+
+*(SEC 8-K filings score neutral by default, so `edgar` shows up in the source
+counts above but rarely in the top-sentiment evidence — it moves the needle
+only when a filing signals something material like an impairment or delisting.)*
 
 > A full sample run is committed at [`docs/sample_digest.md`](docs/sample_digest.md)
 > (and [`docs/sample_digest.json`](docs/sample_digest.json)).
