@@ -89,3 +89,13 @@ def test_config_deep_merge(tmp_path):
     assert cfg.sentiment["min_mentions"] == 5
     # ...but sibling defaults survive the merge.
     assert cfg.sentiment["bullish_at"] == DEFAULT_CONFIG["sentiment"]["bullish_at"]
+
+
+def test_watchlist_replaces_rather_than_unions(tmp_path):
+    cfg_file = tmp_path / "config.yaml"
+    cfg_file.write_text('watchlist:\n  NVDA: ["Nvidia"]\n', encoding="utf-8")
+    cfg = Config.load(cfg_file)
+    # A user watchlist stands alone — the six default tickers don't tag along.
+    assert set(cfg.watchlist) == {"NVDA"}
+    # Other sections still fall back to defaults via the merge.
+    assert cfg.sentiment["min_mentions"] == DEFAULT_CONFIG["sentiment"]["min_mentions"]

@@ -3,6 +3,7 @@
 
 # Tickers to research. Each maps to the company/aliases used for name-based
 # matching in headlines and posts (in addition to $CASHTAG detection).
+# A watchlist here replaces the built-in default set (it is not merged with it).
 watchlist:
   NVDA: ["Nvidia"]
   AAPL: ["Apple"]

@@ -92,6 +92,11 @@ class Config:
         if resolved is not None:
             loaded = yaml.safe_load(resolved.read_text(encoding="utf-8")) or {}
             data = _deep_merge(DEFAULT_CONFIG, loaded)
+            # Per-key merging makes sense for settings (flip one source on/off
+            # without redeclaring the rest), but a user's watchlist should
+            # *replace* the built-in six tickers, not union with them.
+            if isinstance(loaded.get("watchlist"), dict):
+                data["watchlist"] = loaded["watchlist"]
 
         return cls(
             watchlist={k: list(v or []) for k, v in data["watchlist"].items()},
