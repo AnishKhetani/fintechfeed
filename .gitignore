@@ -26,6 +26,9 @@ digests/
 *.digest.json
 *.digest.md
 
+# Local sentiment history
+.fintechfeed/
+
 # OS / editors / local agent config
 .DS_Store
 Thumbs.db

@@ -80,6 +80,10 @@ fintechfeed digest --tickers NVDA,BTC,ETH --format markdown --out today.md
 
 # Machine-readable output for a pipeline
 fintechfeed digest --format json --out today.json
+
+# Every run is saved locally; see how the mood has moved over time
+fintechfeed history                 # matrix of recent runs, all tickers
+fintechfeed history --ticker NVDA   # one name's day-by-day trend
 ```
 
 Requires Python 3.10+.
@@ -108,6 +112,29 @@ Requires Python 3.10+.
 4. **Aggregation** computes a **source-weighted mean** compound score per
    ticker, buckets it into Bullish / Neutral / Bearish, and attaches the most
    opinionated evidence.
+5. **History** appends each run to a local file, so the next digest shows a
+   **day-over-day delta** and flags a ticker as *turning* when its label flips
+   or its score moves past a threshold — the "mood is turning" signal.
+
+### Mood is turning: day-over-day deltas
+
+Because every run is recorded, the digest tells you not just *where* sentiment
+is but *which way it's moving* — the part an analyst actually reacts to. From
+the second day onward a `Δ 1d` column appears and turning names are called out:
+
+```
+| Ticker | Signal | Score | Δ 1d | Mentions | Sources |
+| ------ | ------ | ----: | ---: | -------: | ------- |
+| **NVDA** | 🟢 Bullish | +0.18 | ▲ +0.53 🔄 | 42 | edgar: 5, hackernews: 15, yahoo_rss: 22 |
+| **TSLA** | 🟢 Bullish | +0.19 | ▲ +0.14 🔄 | 38 | edgar: 2, hackernews: 15, yahoo_rss: 21 |
+| **BTC**  | 🟡 Neutral | +0.01 | → +0.00    | 43 | edgar: 1, hackernews: 16, yahoo_rss: 26 |
+
+> 🔄 Mood turning: NVDA (Bearish→Bullish), TSLA (Neutral→Bullish)
+```
+
+This is also where the `edgar` channel earns its weight: a fresh material 8-K
+(an impairment, a delisting, a bankruptcy) can be the thing that tips a name's
+day-over-day score and trips the turning flag.
 
 ### Sources (all free, no API key)
 
@@ -138,6 +165,10 @@ watchlist:
 sentiment:
   source_weights: { yahoo_rss: 1.0, edgar: 1.2, reddit: 0.6, hackernews: 0.8 }
   min_mentions: 2
+  turning_delta: 0.1        # day-over-day move that trips the "turning" flag
+history:
+  enabled: true             # append each run; disable, or use `digest --no-save`
+  path: ".fintechfeed/history.jsonl"
 ```
 
 ### Optional: LLM desk brief
@@ -159,11 +190,15 @@ opt-in and degrades to no-narrative if anything is missing.
   failure.
 - **Per-ticker feeds include adjacent market news**, so a ticker's bucket can
   contain sector-wide items — intentional, since sector tone moves names.
+- **Day-over-day deltas are only as regular as your runs.** The baseline is the
+  most recent run from a *prior* calendar day; if you skip days, the "1d" delta
+  simply spans the gap. The first run on a fresh clone has nothing to compare
+  to, so no deltas show until the second day.
 
 ## Roadmap
 
 - [x] SEC EDGAR 8-K / filing sentiment channel
-- [ ] Sentiment history + day-over-day deltas (a "mood is turning" signal)
+- [x] Sentiment history + day-over-day deltas (a "mood is turning" signal)
 - [ ] StockTwits and a FinTwit list channel
 - [ ] Optional local FinBERT scorer as an alternative to the lexicon
 

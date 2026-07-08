@@ -45,6 +45,34 @@ def test_markdown_render_has_table_and_evidence():
     assert "https://example.com/x" in md
 
 
+def test_markdown_omits_delta_column_on_first_run():
+    # No deltas set -> output matches the pre-history layout (no Δ column).
+    md = render.to_markdown(_sample_digest())
+    assert "Δ 1d" not in md
+    assert "Mood turning" not in md
+
+
+def test_markdown_shows_delta_and_turning():
+    d = _sample_digest()
+    td = d.tickers[0]
+    td.delta = 0.2
+    td.prev_label = "Neutral"
+    td.turning = True
+    md = render.to_markdown(d)
+    assert "Δ 1d" in md
+    assert "▲ +0.20 🔄" in md
+    assert "🔄 **Mood turning:** NVDA (Neutral→Bullish)" in md
+
+
+def test_json_includes_delta_fields():
+    d = _sample_digest()
+    d.tickers[0].delta = 0.2
+    d.tickers[0].turning = True
+    payload = json.loads(render.to_json(d))
+    assert payload["tickers"][0]["delta"] == 0.2
+    assert payload["tickers"][0]["turning"] is True
+
+
 def test_config_defaults_when_no_file(tmp_path, monkeypatch):
     monkeypatch.chdir(tmp_path)  # no config.yaml here
     cfg = Config.load()

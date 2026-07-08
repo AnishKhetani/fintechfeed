@@ -48,7 +48,11 @@ DEFAULT_CONFIG: dict[str, Any] = {
         "min_mentions": 2,
         "bullish_at": 0.15,
         "bearish_at": -0.15,
+        # Flag a ticker as "turning" when its day-over-day score moves at least
+        # this much (a label flip always counts, regardless of size).
+        "turning_delta": 0.1,
     },
+    "history": {"enabled": True, "path": ".fintechfeed/history.jsonl"},
     "llm": {"enabled": False, "model": "claude-haiku-4-5-20251001"},
 }
 
@@ -70,6 +74,7 @@ class Config:
     sources: dict[str, Any]
     sentiment: dict[str, Any]
     llm: dict[str, Any]
+    history: dict[str, Any] = field(default_factory=dict)
     path: Path | None = field(default=None)
 
     @classmethod
@@ -93,6 +98,7 @@ class Config:
             sources=data["sources"],
             sentiment=data["sentiment"],
             llm=data["llm"],
+            history=data.get("history", {}),
             path=resolved,
         )
 
@@ -101,3 +107,9 @@ class Config:
 
     def source_weight(self, source: str) -> float:
         return float(self.sentiment.get("source_weights", {}).get(source, 1.0))
+
+    def history_enabled(self) -> bool:
+        return bool(self.history.get("enabled", True))
+
+    def history_path(self) -> str:
+        return self.history.get("path", ".fintechfeed/history.jsonl")

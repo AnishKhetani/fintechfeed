@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-08T14:03:07.103902+00:00",
+  "generated_at": "2026-07-08T14:17:02.716500+00:00",
   "total_items": 326,
   "sources_used": [
     "yahoo_rss",
@@ -12,11 +12,14 @@
     {
       "ticker": "AAPL",
       "label": "Bullish",
-      "score": 0.2936,
-      "mentions": 44,
+      "score": 0.2705,
+      "delta": null,
+      "prev_label": null,
+      "turning": false,
+      "mentions": 43,
       "by_source": {
         "yahoo_rss": 19,
-        "reddit": 2,
+        "reddit": 1,
         "hackernews": 23
       },
       "evidence": [
@@ -61,6 +64,9 @@
       "ticker": "MSFT",
       "label": "Bullish",
       "score": 0.2592,
+      "delta": null,
+      "prev_label": null,
+      "turning": false,
       "mentions": 38,
       "by_source": {
         "yahoo_rss": 17,
@@ -108,7 +114,10 @@
     {
       "ticker": "NVDA",
       "label": "Bullish",
-      "score": 0.1904,
+      "score": 0.1951,
+      "delta": null,
+      "prev_label": null,
+      "turning": false,
       "mentions": 48,
       "by_source": {
         "yahoo_rss": 22,
@@ -158,6 +167,9 @@
       "ticker": "TSLA",
       "label": "Bullish",
       "score": 0.1799,
+      "delta": null,
+      "prev_label": null,
+      "turning": false,
       "mentions": 44,
       "by_source": {
         "yahoo_rss": 21,
@@ -204,62 +216,17 @@
       ]
     },
     {
-      "ticker": "BTC",
-      "label": "Neutral",
-      "score": 0.0256,
-      "mentions": 51,
-      "by_source": {
-        "yahoo_rss": 26,
-        "edgar": 1,
-        "reddit": 3,
-        "hackernews": 21
-      },
-      "evidence": [
-        {
-          "source": "yahoo_rss",
-          "title": "Bitcoin, Ethereum, XRP, Dogecoin Extend Rally On Iran Deal Optimism: Analyst Says BTC 'At Least Close' To Forming A Bottom",
-          "url": "https://finance.yahoo.com/markets/crypto/articles/bitcoin-ethereum-xrp-dogecoin-extend-021111596.html?.tsrc=rss",
-          "sentiment": 0.9531,
-          "published": "2026-06-16T02:11:11+00:00"
-        },
-        {
-          "source": "yahoo_rss",
-          "title": "Bitcoin vs. Ethereum: Why BTC is Winning the Crypto Market in May 2026",
-          "url": "https://finance.yahoo.com/markets/crypto/articles/bitcoin-vs-ethereum-why-btc-190000285.html?.tsrc=rss",
-          "sentiment": 0.7783,
-          "published": "2026-05-21T19:00:00+00:00"
-        },
-        {
-          "source": "reddit",
-          "title": "Current situation with STRF/STRC/STRK/STRD",
-          "url": "https://www.reddit.com/r/stocks/comments/1uqeeab/current_situation_with_strfstrcstrkstrd/",
-          "sentiment": 0.7717,
-          "published": "2026-07-08T01:21:28+00:00"
-        },
-        {
-          "source": "yahoo_rss",
-          "title": "Elon Musk, The World's First Trillionaire, Holds Bitcoin And 'Some' Dogecoin — 'Let That Sink In,' Says Popular Analyst",
-          "url": "https://finance.yahoo.com/markets/crypto/articles/elon-musk-worlds-first-trillionaire-060337862.html?.tsrc=rss",
-          "sentiment": 0.7579,
-          "published": "2026-06-18T06:03:37+00:00"
-        },
-        {
-          "source": "yahoo_rss",
-          "title": "Bitcoin Struggles As Bond Yields Rise",
-          "url": "https://www.cryptoprowl.com/releases/bitcoin-struggles-as-bond-yields-rise-5549?.tsrc=rss",
-          "sentiment": -0.7096,
-          "published": "2026-05-20T13:12:00+00:00"
-        }
-      ]
-    },
-    {
       "ticker": "ETH",
       "label": "Neutral",
-      "score": -0.0023,
-      "mentions": 43,
+      "score": 0.0202,
+      "delta": null,
+      "prev_label": null,
+      "turning": false,
+      "mentions": 45,
       "by_source": {
         "yahoo_rss": 22,
         "edgar": 1,
+        "reddit": 2,
         "hackernews": 20
       },
       "evidence": [
@@ -278,6 +245,13 @@
           "published": "2026-06-21T07:35:00+00:00"
         },
         {
+          "source": "reddit",
+          "title": "If You Could Only Hold One Crypto for the Next 10 Years, What Would It Be?",
+          "url": "https://www.reddit.com/r/CryptoCurrency/comments/1uqqc15/if_you_could_only_hold_one_crypto_for_the_next_10/",
+          "sentiment": 0.782,
+          "published": "2026-07-08T11:47:52+00:00"
+        },
+        {
           "source": "yahoo_rss",
           "title": "Bitcoin vs. Ethereum: Why BTC is Winning the Crypto Market in May 2026",
           "url": "https://finance.yahoo.com/markets/crypto/articles/bitcoin-vs-ethereum-why-btc-190000285.html?.tsrc=rss",
@@ -285,18 +259,63 @@
           "published": "2026-05-21T19:00:00+00:00"
         },
         {
-          "source": "yahoo_rss",
-          "title": "Bitcoin Struggles As Bond Yields Rise",
-          "url": "https://www.cryptoprowl.com/releases/bitcoin-struggles-as-bond-yields-rise-5549?.tsrc=rss",
-          "sentiment": -0.7096,
-          "published": "2026-05-20T13:12:00+00:00"
-        },
+          "source": "reddit",
+          "title": "Arbitrum to minimize Arbitrum Nova - Moons need to bridged",
+          "url": "https://www.reddit.com/r/CryptoCurrency/comments/1ufkg7g/arbitrum_to_minimize_arbitrum_nova_moons_need_to/",
+          "sentiment": 0.7324,
+          "published": "2026-06-25T19:46:27+00:00"
+        }
+      ]
+    },
+    {
+      "ticker": "BTC",
+      "label": "Neutral",
+      "score": -0.016,
+      "delta": null,
+      "prev_label": null,
+      "turning": false,
+      "mentions": 68,
+      "by_source": {
+        "yahoo_rss": 26,
+        "edgar": 1,
+        "reddit": 20,
+        "hackernews": 21
+      },
+      "evidence": [
         {
           "source": "yahoo_rss",
-          "title": "Ethereum’s Price Breaks Down Below $2,000",
-          "url": "https://www.cryptoprowl.com/releases/ethereums-price-breaks-down-below-2000-5711?.tsrc=rss",
-          "sentiment": -0.6808,
-          "published": "2026-05-29T13:31:00+00:00"
+          "title": "Bitcoin, Ethereum, XRP, Dogecoin Extend Rally On Iran Deal Optimism: Analyst Says BTC 'At Least Close' To Forming A Bottom",
+          "url": "https://finance.yahoo.com/markets/crypto/articles/bitcoin-ethereum-xrp-dogecoin-extend-021111596.html?.tsrc=rss",
+          "sentiment": 0.9531,
+          "published": "2026-06-16T02:11:11+00:00"
+        },
+        {
+          "source": "reddit",
+          "title": "Strategy (MSTR) mNAV Ratio Chart: Confidence Eroding",
+          "url": "https://www.reddit.com/r/CryptoCurrency/comments/1uqm3ii/strategy_mstr_mnav_ratio_chart_confidence_eroding/",
+          "sentiment": 0.8622,
+          "published": "2026-07-08T07:56:06+00:00"
+        },
+        {
+          "source": "reddit",
+          "title": "Why panic when a big name sells?",
+          "url": "https://www.reddit.com/r/CryptoCurrency/comments/1upqufi/why_panic_when_a_big_name_sells/",
+          "sentiment": -0.8334,
+          "published": "2026-07-07T10:15:19+00:00"
+        },
+        {
+          "source": "reddit",
+          "title": "Bitcoin experts split over plan to freeze Satoshi's 1.1 million bitcoin as quantum threat grows",
+          "url": "https://www.reddit.com/r/CryptoCurrency/comments/1uqbuu9/bitcoin_experts_split_over_plan_to_freeze/",
+          "sentiment": -0.7901,
+          "published": "2026-07-07T23:32:58+00:00"
+        },
+        {
+          "source": "reddit",
+          "title": "If You Could Only Hold One Crypto for the Next 10 Years, What Would It Be?",
+          "url": "https://www.reddit.com/r/CryptoCurrency/comments/1uqqc15/if_you_could_only_hold_one_crypto_for_the_next_10/",
+          "sentiment": 0.782,
+          "published": "2026-07-08T11:47:52+00:00"
         }
       ]
     }

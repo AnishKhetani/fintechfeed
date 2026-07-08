@@ -42,6 +42,15 @@ sentiment:
   # Compound-score thresholds for the Bullish / Neutral / Bearish label.
   bullish_at: 0.15
   bearish_at: -0.15
+  # Flag a ticker as "turning" when its day-over-day score moves at least this
+  # much (a Bullish/Neutral/Bearish label flip always counts, whatever the size).
+  turning_delta: 0.1
+
+# Sentiment history — each run is appended here so the next run can show
+# day-over-day deltas and a "mood is turning" flag. Local and git-ignored.
+history:
+  enabled: true
+  path: ".fintechfeed/history.jsonl"
 
 # Optional LLM synthesis of the digest narrative.
 # Requires `pip install fintechfeed[llm]` and ANTHROPIC_API_KEY in the environment.

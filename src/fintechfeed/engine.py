@@ -12,13 +12,19 @@ from collections import defaultdict
 
 from . import sentiment
 from .config import Config
+from .history import HistoryStore
 from .models import Digest, Item, ScoredItem, TickerDigest
 from .sources import Source, build_sources
 from .tickers import TickerResolver
 
 
 class Engine:
-    def __init__(self, config: Config, sources: list[Source] | None = None):
+    def __init__(
+        self,
+        config: Config,
+        sources: list[Source] | None = None,
+        history: HistoryStore | None = None,
+    ):
         self.config = config
         self.resolver = TickerResolver(config.watchlist)
         self.sources = (
@@ -26,6 +32,7 @@ class Engine:
             if sources is not None
             else build_sources(config.enabled_sources(), config.sources)
         )
+        self.history = history
         self.errors: dict[str, str] = {}
 
     def _collect(self) -> list[Item]:
@@ -103,13 +110,28 @@ class Engine:
         digests.sort(key=lambda d: (abs(d.score), d.mentions), reverse=True)
         return digests
 
+    def _apply_history(self, digest: Digest) -> None:
+        """Annotate tickers with day-over-day deltas, then record this run."""
+        prev = self.history.previous(digest.generated_at)
+        turning_at = float(self.config.sentiment.get("turning_delta", 0.1))
+        for td in digest.tickers:
+            rec = prev.get(td.ticker)
+            if rec is not None:
+                td.prev_label = rec.get("label")
+                td.delta = round(td.score - float(rec["score"]), 4)
+                td.turning = td.prev_label != td.label or abs(td.delta) >= turning_at
+        self.history.append(digest)
+
     def run(self) -> Digest:
         items = self._collect()
         scored = self._score(items)
         tickers = self._aggregate(scored)
         used = [s.name for s in self.sources if s.name not in self.errors]
-        return Digest.now(
+        digest = Digest.now(
             tickers=tickers,
             total_items=len(items),
             sources_used=used,
         )
+        if self.history is not None:
+            self._apply_history(digest)
+        return digest

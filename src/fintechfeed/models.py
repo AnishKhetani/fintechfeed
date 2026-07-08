@@ -51,6 +51,10 @@ class TickerDigest:
     label: str                         # Bullish | Neutral | Bearish
     by_source: dict[str, int] = field(default_factory=dict)
     top_items: list[ScoredItem] = field(default_factory=list)
+    # Day-over-day change vs the most recent prior-day run (None on first run).
+    delta: float | None = None
+    prev_label: str | None = None
+    turning: bool = False              # mood shifted enough to flag
 
 
 @dataclass
